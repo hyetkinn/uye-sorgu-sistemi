@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Üye Sorgulama Sistemi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .no-results {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Üye Bilgisi Sorgulama</h2>
+    <form method="post">
+        <input type="text" name="isim" placeholder="İsim">
+        <input type="text" name="soyisim" placeholder="Soyisim">
+        <input type="text" name="memleket" placeholder="Memleket">
+        <button type="submit">Sorgula</button>
+    </form>
+
+    {% if results and results[0] != 'Sistemde eşleşen kayıt bulunamadı.' %}
+    <table>
+        <thead>
+            <tr>
+                <th>İsim Soyisim</th>
+                <th>TC</th>
+                <th>İlçe</th>
+                <th>Mahalle</th>
+                <th>Doğum Tarihi</th>
+                <th>Memleket</th>
+                <th>Baba</th>
+                <th>Anne</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            {% set parts = result.split(" – ") %}
+            <tr>
+                <td>{{ parts[0] }}</td>
+                <td>{{ parts[1].replace('TC: ', '') }}</td>
+                <td>{{ parts[2].replace('İlçe: ', '') }}</td>
+                <td>{{ parts[3].replace('Mahalle: ', '') }}</td>
+                <td>{{ parts[4].replace('Doğum: ', '') }}</td>
+                <td>{{ parts[5].replace('Memleket: ', '') }}</td>
+                <td>{{ parts[6].replace('Baba: ', '') }}</td>
+                <td>{{ parts[7].replace('Anne: ', '') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% elif results %}
+        <p class="no-results">{{ results[0] }}</p>
+    {% endif %}
+</body>
+</html>
