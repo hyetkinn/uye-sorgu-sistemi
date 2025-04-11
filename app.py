@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import pandas as pd
+import os
 
 app = Flask(__name__)
 df = pd.read_excel("uyeler.xlsx")
@@ -56,7 +57,10 @@ def home():
                 results.append(result)
         else:
             results = ["Sistemde eşleşen kayıt bulunamadı."]
-    return render_template("index.html", results=results)
+    # Portu doğru şekilde ayarlıyoruz
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host="0.0.0.0", port=port)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
