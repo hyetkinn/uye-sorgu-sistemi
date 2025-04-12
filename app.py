@@ -2,9 +2,9 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Örnek veriler (gerçek verilerle değiştirilmeli)
+# Gerçek veriler
 df = [
-    {"isim": "Hüseyin Yetkin", "soyisim": "Türkmen", "tc": "123456789", "ilçe": "Mamak", "mahalle": "Yenimahalle", "dogum": "12.03.1995", "memleket": "Ankara", "baba": "Ali Yetkin", "anne": "Zeynep Yetkin"},
+    {"isim": "Hüseyin Yetkin", "soyisim": "Türkmen", "tc": "12345678901", "ilçe": "Mamak", "mahalle": "Yenimahalle", "dogum": "12.03.1995", "memleket": "Ankara", "baba": "Ali Türkmen", "anne": "Zeynep Türkmen"},
     # Diğer üyeleri burada ekleyebilirsin.
 ]
 
