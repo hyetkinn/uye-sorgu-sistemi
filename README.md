@@ -1,1 +1,0 @@
-üye sorgu sistemi 
