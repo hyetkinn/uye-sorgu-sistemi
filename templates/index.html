@@ -1,4 +1,132 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üye Sorgulama Sistemi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            min-width: 180px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        .no-results {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+        /* Genç etiketi için stiller */
+        .genc-row {
+            background-color: #e6f2ff; /* Açık mavi arkaplan */
+        }
+        .genc-etiket {
+            color: #0066cc; /* Koyu mavi renk */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Üye Bilgisi Sorgulama</h2>
+    <form method="post">
+        <input type="text" name="isim" placeholder="İsim">
+        <input type="text" name="soyisim" placeholder="Soyisim">
+        <input type="text" name="memleket" placeholder="Memleket">
+        <button type="submit">Sorgula</button>
+    </form>
+
+    {% if results and results[0] != 'Sistemde eşleşen kayıt bulunamadı.' %}
+    <table>
+        <thead>
+            <tr>
+                <th>İsim Soyisim</th>
+                <th>TC</th>
+                <th>İlçe</th>
+                <th>Mahalle</th>
+                <th>Doğum Tarihi</th>
+                <th>Memleket</th>
+                <th>Baba</th>
+                <th>Anne</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            {% set parts = result.split(" – ") %}
+            {% set isim_soyisim = parts[0] %}
+            {% set is_genc = "(GENÇ)" in isim_soyisim %}
+            
+            <tr {% if is_genc %}class="genc-row"{% endif %}>
+                <td>
+                    {% if is_genc %}
+                        {{ isim_soyisim.replace(" (GENÇ)", "") }} <span class="genc-etiket">(GENÇ)</span>
+                    {% else %}
+                        {{ isim_soyisim }}
+                    {% endif %}
+                </td>
+                <td>{{ parts[1].replace('TC: ', '') }}</td>
+                <td>{{ parts[2].replace('İlçe: ', '') }}</td>
+                <td>{{ parts[3].replace('Mahalle: ', '') }}</td>
+                <td>{{ parts[4].replace('Doğum: ', '') }}</td>
+                <td>{{ parts[5].replace('Memleket: ', '') }}</td>
+                <td>{{ parts[6].replace('Baba: ', '') }}</td>
+                <td>{{ parts[7].replace('Anne: ', '') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% elif results %}
+        <p class="no-results">{{ results[0] }}</p>
+    {% endif %}
+</body>
+</html><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
