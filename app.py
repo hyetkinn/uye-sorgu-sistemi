@@ -31,6 +31,16 @@ def excel_oku():
 # Uygulama başladığında Excel'i oku
 excel_oku()
 
+def format_dogum_tarihi(gun, ay, yil):
+    try:
+        # Sayısal değerleri integer'a çevir
+        gun = int(float(gun))
+        ay = int(float(ay))
+        yil = int(float(yil))
+        return f"{gun:02d}.{ay:02d}.{yil}"
+    except:
+        return f"{gun}.{ay}.{yil}"
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     try:
@@ -54,20 +64,22 @@ def home():
 
                     for _, row in filtered_df.iterrows():
                         try:
-                            # Doğum tarihini birleştir
-                            dogum_yil = int(row['YIL'])
+                            # Doğum tarihini kontrol et
+                            dogum_yil = int(float(row['YIL']))
                             genc_etiketi = " (GENÇ)" if dogum_yil >= 1995 else ""
                             
+                            # Doğum tarihini formatla
+                            dogum_tarihi = format_dogum_tarihi(row['GÜN'], row['AY'], row['YIL'])
+                            
                             result = (
-                                f"{row['İSİM']} {row['SOYİSİM']} – "
+                                f"{row['İSİM']}{genc_etiketi} {row['SOYİSİM']} – "
                                 f"TC: {row['TC KİMLİK']} – "
                                 f"İlçe: {row['İLÇE']} – "
                                 f"Mahalle: {row['MAHALLE']} – "
-                                f"Doğum: {row['GÜN']}.{row['AY']}.{row['YIL']} – "
+                                f"Doğum: {dogum_tarihi} – "
                                 f"Memleket: {row['MEMLEKET']} – "
                                 f"Baba: {row['BABA ADI']} – "
                                 f"Anne: {row['ANNE ADI']}"
-                                f"{genc_etiketi}"
                             )
                             results.append(result)
                         except Exception as e:
