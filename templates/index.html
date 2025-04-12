@@ -1,98 +1,145 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Üye Sorgulama Sistemi</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        h2 {
-            color: #333;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 8px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            padding: 8px 16px;
-            background-color: #007BFF;
-            border: none;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-            font-size: 14px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .no-results {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.7">
+  <style type="text/css">
+    body {background-color: #f7f7f7}
+    span.s1 {font-kerning: none}
+  </style>
 </head>
 <body>
-    <h2>Üye Bilgisi Sorgulama</h2>
-    <form method="post">
-        <input type="text" name="isim" placeholder="İsim">
-        <input type="text" name="soyisim" placeholder="Soyisim">
-        <input type="text" name="memleket" placeholder="Memleket">
-        <button type="submit">Sorgula</button>
-    </form>
-
-    {% if results and results[0] != 'Sistemde eşleşen kayıt bulunamadı.' %}
-    <table>
-        <thead>
-            <tr>
-                <th>İsim Soyisim</th>
-                <th>TC</th>
-                <th>İlçe</th>
-                <th>Mahalle</th>
-                <th>Doğum Tarihi</th>
-                <th>Memleket</th>
-                <th>Baba</th>
-                <th>Anne</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in results %}
-            {% set parts = result.split(" – ") %}
-            <tr>
-                <td>{{ parts[0] }}</td>
-                <td>{{ parts[1].replace('TC: ', '') }}</td>
-                <td>{{ parts[2].replace('İlçe: ', '') }}</td>
-                <td>{{ parts[3].replace('Mahalle: ', '') }}</td>
-                <td>{{ parts[4].replace('Doğum: ', '') }}</td>
-                <td>{{ parts[5].replace('Memleket: ', '') }}</td>
-                <td>{{ parts[6].replace('Baba: ', '') }}</td>
-                <td>{{ parts[7].replace('Anne: ', '') }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% elif results %}
-        <p class="no-results">{{ results[0] }}</p>
-    {% endif %}
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b>&lt;!DOCTYPE html&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b>&lt;html&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b>&lt;head&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;title&gt;Üye Sorgulama Sistemi&lt;/title&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;style&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>body {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>padding: 20px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>background-color: #f9f9f9;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>max-width: 1200px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>margin: 0 auto;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>h2 {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #333;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>text-align: center;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>margin-bottom: 20px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>form {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>margin-bottom: 30px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>display: flex;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>flex-wrap: wrap;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>justify-content: center;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>gap: 10px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>input[type="text"] {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>padding: 10px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>border: 1px solid #ccc;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>border-radius: 4px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>min-width: 180px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>button {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>padding: 10px 20px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>background-color: #007BFF;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>border: none;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>color: white;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>border-radius: 4px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>cursor: pointer;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>font-weight: bold;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>button:hover {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>background-color: #0056b3;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>table {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>width: 100%;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>border-collapse: collapse;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>background-color: white;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>box-shadow: 0 1px 3px rgba(0,0,0,0.1);</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>th, td {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>padding: 12px 15px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>border: 1px solid #ddd;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>text-align: left;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>th {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>background-color: #f2f2f2;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>font-weight: bold;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #333;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>.no-results {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>color: red;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>font-weight: bold;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>text-align: center;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>padding: 20px;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>/* Genç etiketi için stiller */</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>.genc-row {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>background-color: #e6f2ff; /* Açık mavi arkaplan */</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>.genc-etiket {</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>color: #0066cc; /* Koyu mavi renk */</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>font-weight: bold;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;/style&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b>&lt;/head&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b>&lt;body&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;h2&gt;Üye Bilgisi Sorgulama&lt;/h2&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;form method="post"&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;input type="text" name="isim" placeholder="İsim"&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;input type="text" name="soyisim" placeholder="Soyisim"&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;input type="text" name="memleket" placeholder="Memleket"&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;button type="submit"&gt;Sorgula&lt;/button&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;/form&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626; min-height: 21.0px"><span class="s1"><b></b></span><br></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>{% if results and results[0] != 'Sistemde eşleşen kayıt bulunamadı.' %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;table&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;thead&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;tr&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;İsim Soyisim&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;TC&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;İlçe&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;Mahalle&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;Doğum Tarihi&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;Memleket&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;Baba&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;th&gt;Anne&lt;/th&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/tr&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;/thead&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;tbody&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>{% for result in results %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>{% set parts = result.split(" – ") %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>{% set isim_soyisim = parts[0] %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>{% set is_genc = "(GENÇ)" in isim_soyisim %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626; min-height: 21.0px"><span class="s1"><b><span class="Apple-converted-space">            </span></b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;tr {% if is_genc %}class="genc-row"{% endif %}&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                    </span>{% if is_genc %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                        </span>{{ isim_soyisim.replace(" (GENÇ)", "") }} &lt;span class="genc-etiket"&gt;(GENÇ)&lt;/span&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                    </span>{% else %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                        </span>{{ isim_soyisim }}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                    </span>{% endif %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;{{ parts[1].replace('TC: ', '') }}&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;{{ parts[2].replace('İlçe: ', '') }}&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;{{ parts[3].replace('Mahalle: ', '') }}&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;{{ parts[4].replace('Doğum: ', '') }}&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;{{ parts[5].replace('Memleket: ', '') }}&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;{{ parts[6].replace('Baba: ', '') }}&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">                </span>&lt;td&gt;{{ parts[7].replace('Anne: ', '') }}&lt;/td&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>&lt;/tr&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">            </span>{% endfor %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;/tbody&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>&lt;/table&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>{% elif results %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">        </span>&lt;p class="no-results"&gt;{{ results[0] }}&lt;/p&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b><span class="Apple-converted-space">    </span>{% endif %}</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b>&lt;/body&gt;</b></span></h2>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Arial; color: #262626; -webkit-text-stroke: #262626"><span class="s1"><b>&lt;/html&gt;</b></span></h2>
 </body>
 </html>
