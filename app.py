@@ -1,12 +1,20 @@
 from flask import Flask, render_template, request
+import pandas as pd
 
 app = Flask(__name__)
 
-# Gerçek veriler
-df = [
-    {"isim": "Hüseyin Yetkin", "soyisim": "Türkmen", "tc": "12345678901", "ilçe": "Mamak", "mahalle": "Yenimahalle", "dogum": "12.03.1995", "memleket": "Ankara", "baba": "Ali Türkmen", "anne": "Zeynep Türkmen"},
-    # Diğer üyeleri burada ekleyebilirsin.
-]
+def excel_oku():
+    try:
+        # Excel dosyasını oku
+        df = pd.read_excel('uyeler.xlsx')
+        # DataFrame'i liste of dict'e çevir
+        return df.to_dict('records')
+    except Exception as e:
+        print(f"Excel okuma hatası: {e}")
+        return []
+
+# Excel'den verileri oku
+df = excel_oku()
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -18,9 +26,9 @@ def home():
 
         # Verileri filtrele
         for member in df:
-            if isim_input in member["isim"].lower() and soyisim_input in member["soyisim"].lower() and memleket_input in member["memleket"].lower():
+            if isim_input in str(member["isim"]).lower() and soyisim_input in str(member["soyisim"]).lower() and memleket_input in str(member["memleket"]).lower():
                 # GENÇ etiketi ekle
-                dogum_yil = int(member["dogum"].split(".")[2])
+                dogum_yil = int(str(member["dogum"]).split(".")[2])
                 genc_etiketi = " (GENÇ)" if dogum_yil >= 1995 else ""
                 results.append(f"{member['isim']} {member['soyisim']} – TC: {member['tc']} – İlçe: {member['ilçe']} – Mahalle: {member['mahalle']} – Doğum: {member['dogum']} – Memleket: {member['memleket']} – Baba: {member['baba']} – Anne: {member['anne']} {genc_etiketi}")
 
