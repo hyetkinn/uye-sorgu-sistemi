@@ -38,8 +38,8 @@
                     <th>Anne</th>
                 </tr>
                 {% for result in results %}
-                    {% set parts = result.split(" – ") %}
-                    <tr {% if "(GENÇ)" in parts[0] %}class="genc"{% endif %}>
+                    <tr {% if "(GENÇ)" in result %}class="genc"{% endif %}>
+                        {% set parts = result.split(" – ") %}
                         <td>{{ parts[0] }}</td>
                         <td>{{ parts[1].replace('TC: ', '') }}</td>
                         <td>{{ parts[2].replace('İlçe: ', '') }}</td>
