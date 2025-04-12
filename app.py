@@ -1,9 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import pandas as pd
 import traceback
 from datetime import datetime
+import os
+import logging
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
+logging.basicConfig(level=logging.DEBUG)
 
 # Global değişken olarak verileri tut
 df = None
@@ -12,20 +15,20 @@ def excel_oku():
     global df
     try:
         if df is None:  # Sadece ilk kez oku
-            print("Excel dosyası okunuyor...")
+            app.logger.info("Excel dosyası okunuyor...")
             df = pd.read_excel('uyeler.xlsx')
             # Sütun isimlerini düzelt
             df.columns = [col.strip().upper() for col in df.columns]
-            print("Sütun isimleri:", df.columns.tolist())
-            print(f"Excel dosyası başarıyla okundu. Toplam {len(df)} kayıt var.")
+            app.logger.info("Sütun isimleri: %s", df.columns.tolist())
+            app.logger.info("Excel dosyası başarıyla okundu. Toplam %d kayıt var.", len(df))
             
             # İlk satırı göster
             if not df.empty:
-                print("İlk satır örneği:")
-                print(df.iloc[0])
+                app.logger.info("İlk satır örneği:")
+                app.logger.info(df.iloc[0])
     except Exception as e:
-        print(f"Excel okuma hatası: {e}")
-        print("Hata detayı:", traceback.format_exc())
+        app.logger.error("Excel okuma hatası: %s", str(e))
+        app.logger.error("Hata detayı: %s", traceback.format_exc())
         df = pd.DataFrame()  # Boş DataFrame oluştur
 
 # Uygulama başladığında Excel'i oku
@@ -41,16 +44,21 @@ def format_dogum_tarihi(gun, ay, yil):
     except:
         return f"{gun}.{ay}.{yil}"
 
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(app.static_folder, filename)
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     try:
+        app.logger.info("Ana sayfa isteği alındı. Method: %s", request.method)
         results = []
         if request.method == "POST":
             isim_input = request.form["isim"].strip().lower()
             soyisim_input = request.form["soyisim"].strip().lower()
             memleket_input = request.form["memleket"].strip().lower()
 
-            print(f"Arama yapılıyor: {isim_input} {soyisim_input} {memleket_input}")
+            app.logger.info("Arama yapılıyor: %s %s %s", isim_input, soyisim_input, memleket_input)
 
             if df is not None and not df.empty:
                 try:
@@ -61,6 +69,7 @@ def home():
                         df['MEMLEKET'].str.lower().str.contains(memleket_input, na=False)
                     )
                     filtered_df = df[mask]
+                    app.logger.info("Filtreleme sonucu %d kayıt bulundu", len(filtered_df))
 
                     for _, row in filtered_df.iterrows():
                         try:
@@ -83,21 +92,23 @@ def home():
                             )
                             results.append(result)
                         except Exception as e:
-                            print(f"Satır işleme hatası: {e}")
-                            print("Hata detayı:", traceback.format_exc())
+                            app.logger.error("Satır işleme hatası: %s", str(e))
+                            app.logger.error("Hata detayı: %s", traceback.format_exc())
                 except Exception as e:
-                    print(f"Filtreleme hatası: {e}")
-                    print("Hata detayı:", traceback.format_exc())
-                    print("Mevcut sütun isimleri:", df.columns.tolist())
+                    app.logger.error("Filtreleme hatası: %s", str(e))
+                    app.logger.error("Hata detayı: %s", traceback.format_exc())
+                    app.logger.error("Mevcut sütun isimleri: %s", df.columns.tolist())
 
             if not results:
                 results.append("Sistemde eşleşen kayıt bulunamadı.")
 
+        app.logger.info("Şablon render ediliyor...")
         return render_template('index.html', results=results)
     except Exception as e:
-        print(f"Genel hata: {e}")
-        print("Hata detayı:", traceback.format_exc())
+        app.logger.error("Genel hata: %s", str(e))
+        app.logger.error("Hata detayı: %s", traceback.format_exc())
         return "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.", 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.logger.info("Uygulama başlatılıyor...")
+    app.run(debug=True, port=8080, host='127.0.0.1')
