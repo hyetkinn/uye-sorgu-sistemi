@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 # Flask uygulamasını başlat
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 
 # Excel dosyasını yükle
 df = pd.read_excel("uyeler.xlsx")
