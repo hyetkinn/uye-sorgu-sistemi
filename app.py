@@ -2,9 +2,13 @@ from flask import Flask, request, render_template
 import pandas as pd
 import os
 
+# Flask uygulamasını başlat
 app = Flask(__name__)
+
+# Excel dosyasını yükle
 df = pd.read_excel("uyeler.xlsx")
 
+# Ana sayfa route'u
 @app.route("/", methods=["GET", "POST"])
 def home():
     results = []
@@ -28,6 +32,7 @@ def home():
             normalized_input = normalize(search_input)
             return all(part in normalized_cell for part in normalized_input.split())
 
+        # Veri filtreleme işlemi
         filtered_df = df.copy()
 
         if isim_input:
@@ -37,6 +42,7 @@ def home():
         if memleket_input:
             filtered_df = filtered_df[filtered_df["MEMLEKET"].apply(lambda x: contains_all_parts(x, memleket_input))]
 
+        # Sonuçları listele
         if not filtered_df.empty:
             for _, row in filtered_df.iterrows():
                 gun = int(row['GÜN']) if not pd.isna(row['GÜN']) else "--"
@@ -57,10 +63,11 @@ def home():
                 results.append(result)
         else:
             results = ["Sistemde eşleşen kayıt bulunamadı."]
-    # Portu doğru şekilde ayarlıyoruz
+    
+    # Portu ayarlayalım
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host="0.0.0.0", port=port)
 
-if __name__ == '__main__':
+# Flask uygulamasını çalıştır
+if __name__ == "__main__":
     app.run(debug=True)
-
